@@ -1,0 +1,11 @@
+def verificar_par(numero):
+    if numero % 2 == 0:
+        return "Par"
+    else:
+        return "Ímpar"
+
+
+n = int(input("Digite um número: "))
+resultado = verificar_par(n)
+
+print(f"O número é {resultado}")
