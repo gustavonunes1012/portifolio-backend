@@ -1,0 +1,53 @@
+Refatoração do Sistema Bancário
+Mudanças aplicadas no código
+1. 
+Separação de responsabilidades
+• 
+A lógica de cálculos financeiros foi separada da validação de clientes e do menu.
+• 
+Criadas duas classes:
+• 
+Operacoes → somente cálculos (depósito, saque, transferência)
+• 
+ServicoBanco → valida clientes, conecta operações e retorna resultados
+2. 
+Remoção de código repetido (DRY)
+• 
+Checagens de saldo e existência de cliente foram centralizadas.
+• 
+Antes, cada método repetia validações; agora são feitas apenas na camada de serviço.
+3. 
+Separação de lógica e interface
+• 
+Métodos refatorados não usam print, apenas retornam True ou False.
+• 
+Interface (menu principal) decide como exibir mensagens para o usuário.
+4. 
+Clareza de nomes
+• 
+Nomes de métodos e variáveis tornados significativos:
+• 
+depositar(cliente, valor)
+• 
+sacar(cliente, valor)
+• 
+transferir(origem, destino, valor)
+• 
+Substituíram nomes genéricos ou abreviações (ops, banco).
+5. 
+Redução da complexidade dos métodos
+• 
+Antes, métodos grandes com várias condições e prints.
+• 
+Agora, métodos pequenos, com uma única responsabilidade.
+Boas práticas aplicadas
+• 
+Single Responsibility Principle (SRP) → Cada classe/método tem apenas uma função.
+• 
+DRY (Don't Repeat Yourself) → Código duplicado removido.
+• 
+Separação de lógica e apresentação → Métodos não exibem mensagens, apenas retornam resultados.
+• 
+Clean Code → Nomes claros, métodos curtos e legíveis.
+• 
+Facilidade para manutenção → Alterações futuras no sistema não quebram lógica existente.
