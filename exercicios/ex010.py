@@ -15,5 +15,5 @@ if n2 < menorNumero:
 if n3 < menorNumero:
     menorNumero = n3
 
-print(f'O maior número é: {maiorNumero}')
+print(f'O maior número é: {maiorNumero}')   
 print(f'O menor número é: {menorNumero}')
