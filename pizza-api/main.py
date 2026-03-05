@@ -14,3 +14,17 @@ def criar_usuario(usuario: Usuario):
 @app.get("/usuarios")
 def listar_usuarios():
     return usuarios
+
+from schemas import Pedido
+from models import pedidos
+
+
+@app.post("/pedidos")
+def criar_pedido(pedido: Pedido):
+    pedidos.append(pedido)
+    return pedido
+
+
+@app.get("/pedidos")
+def listar_pedidos():
+    return pedidos
