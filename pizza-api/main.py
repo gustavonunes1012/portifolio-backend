@@ -1,5 +1,9 @@
 from fastapi import FastAPI
+from fastapi import HTTPException
 from schemas import Usuario
+from schemas import Pedido
+from models import pedidos
+
 from models import usuarios
 
 app = FastAPI()
@@ -15,8 +19,6 @@ def criar_usuario(usuario: Usuario):
 def listar_usuarios():
     return usuarios
 
-from schemas import Pedido
-from models import pedidos
 
 
 @app.post("/pedidos")
