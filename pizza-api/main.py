@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from schemas import Usuario, Pedido
+from schemas import Usuario, Pedido, ItemPedido
 from models import usuarios, pedidos
 
 app = FastAPI()
@@ -49,10 +49,8 @@ def deletar_usuario(usuario_id: int):
 
 @app.post("/pedidos")
 def criar_pedido(pedido: Pedido):
-    # Valida se o usuário existe
     if not any(u.id == pedido.usuario_id for u in usuarios):
         raise HTTPException(status_code=400, detail="Usuário não encontrado")
-    # Valida se ID do pedido já existe
     for p in pedidos:
         if p.id == pedido.id:
             raise HTTPException(status_code=400, detail="ID do pedido já existe")

@@ -131,3 +131,75 @@ Testes automatizados
  
 👨‍💻 Autor Gustavo Gonçalves
 Projeto desenvolvido para estudo de FastAPI e criação de APIs REST em Python.
+
+
+DOCUMENTACAO DA API DE PEDIDOS DE PIZZA - VERSAO 2.0
+DESCRICAO DO PROJETO
+Esta e uma API REST desenvolvida com FastAPI para gerenciar usuarios e pedidos de uma pizzaria. A versao 2.0 introduz validacoes de dados rigorosas e operacoes completas de edicao e exclusao.
+TECNOLOGIAS
+Python, FastAPI, Pydantic e Uvicorn.
+COMO EXECUTAR
+1. 
+Certifique-se de ter o Python instalado.
+2. 
+Instale as dependencias: pip install fastapi uvicorn email-validator
+3. 
+Execute o servidor: uvicorn main:app --reload
+4. 
+Acesse o console interativo em: http://127.0.0.1:8000/docs
+REGRAS DE VALIDACAO (NOVIDADES DA V2)
+As seguintes regras foram implementadas nos modelos de dados:
+• 
+Usuario: O nome deve ter pelo menos 2 caracteres e o e-mail deve ser um formato valido.
+• 
+Item do Pedido: O nome do item nao pode ser vazio e a quantidade deve ser maior que zero.
+• 
+Pedido: Um pedido so pode ser criado se o usuario_id informado ja existir no sistema e deve conter pelo menos um item na lista.
+ESTRUTURA DE DADOS
+Modelo Usuario:
+• 
+id (inteiro)
+• 
+nome (texto)
+• 
+email (texto formatado)
+Modelo ItemPedido:
+• 
+nome (texto)
+• 
+quantidade (inteiro)
+Modelo Pedido:
+• 
+id (inteiro)
+• 
+usuario_id (inteiro)
+• 
+itens (lista de objetos ItemPedido)
+ENDPOINTS DISPONIVEIS
+Gerenciamento de Usuarios:
+• 
+POST /usuarios: Cria um novo usuario. Verifica se o ID ja esta em uso.
+• 
+GET /usuarios: Retorna a lista de todos os usuarios cadastrados.
+• 
+GET /usuarios/{id}: Retorna os detalhes de um usuario especifico.
+• 
+PUT /usuarios/{id}: Atualiza as informacoes de um usuario existente.
+• 
+DELETE /usuarios/{id}: Remove um usuario do sistema.
+Gerenciamento de Pedidos:
+• 
+POST /pedidos: Cria um novo pedido. Valida se o usuario existe e se o ID do pedido e unico.
+• 
+GET /pedidos: Retorna a lista de todos os pedidos realizados.
+• 
+GET /pedidos/{id}: Retorna os detalhes de um pedido especifico.
+• 
+PUT /pedidos/{id}: Atualiza os dados ou itens de um pedido existente.
+• 
+DELETE /pedidos/{id}: Remove um pedido do sistema.
+ARMANEZAMENTO E LIMITACOES
+Os dados permanecem armazenados em listas na memoria RAM. Se o processo do servidor for encerrado, todos os registros de usuarios e pedidos serao apagados. Nao ha integracao com banco de dados persistente nesta versao.
+AUTOR
+Gustavo Goncalves
+ 
