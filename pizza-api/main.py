@@ -53,3 +53,26 @@ def criar_pedido(pedido: Pedido):
 @app.get("/pedidos")
 def listar_pedidos():
     return pedidos
+
+@app.get("/pedidos/{pedido_id}")
+def buscar_pedido(pedido_id: int):
+    for p in pedidos:
+        if p.id == pedido_id:
+            return p
+    raise HTTPException(status_code=404, detail="Pedido não encontrado")
+
+@app.put("/pedidos/{pedido_id}")
+def atualizar_pedido(pedido_id: int, dados: Pedido):
+    for i, p in enumerate(pedidos):
+        if p.id == pedido_id:
+            pedidos[i] = dados
+            return dados
+    raise HTTPException(status_code=404, detail="Pedido não encontrado")
+
+@app.delete("/pedidos/{pedido_id}")
+def deletar_pedido(pedido_id: int):
+    for i, p in enumerate(pedidos):
+        if p.id == pedido_id:
+            pedidos.pop(i)
+            return {"detail": "Pedido removido"}
+    raise HTTPException(status_code=404, detail="Pedido não encontrado")
