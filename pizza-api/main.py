@@ -1,13 +1,12 @@
-from fastapi import FastAPI
-from fastapi import HTTPException
-from schemas import Usuario
-from schemas import Pedido
-from models import pedidos
-
-from models import usuarios
+from fastapi import FastAPI, HTTPException
+from schemas import Usuario, Pedido
+from models import usuarios, pedidos
 
 app = FastAPI()
 
+# -------------------------------
+# CRUD de Usuários
+# -------------------------------
 
 @app.post("/usuarios")
 def criar_usuario(usuario: Usuario):
@@ -20,6 +19,7 @@ def criar_usuario(usuario: Usuario):
 @app.get("/usuarios")
 def listar_usuarios():
     return usuarios
+
 @app.get("/usuarios/{usuario_id}")
 def buscar_usuario(usuario_id: int):
     for u in usuarios:
@@ -43,12 +43,21 @@ def deletar_usuario(usuario_id: int):
             return {"detail": "Usuário removido"}
     raise HTTPException(status_code=404, detail="Usuário não encontrado")
 
+# -------------------------------
+# CRUD de Pedidos
+# -------------------------------
 
 @app.post("/pedidos")
 def criar_pedido(pedido: Pedido):
+    # Valida se o usuário existe
+    if not any(u.id == pedido.usuario_id for u in usuarios):
+        raise HTTPException(status_code=400, detail="Usuário não encontrado")
+    # Valida se ID do pedido já existe
+    for p in pedidos:
+        if p.id == pedido.id:
+            raise HTTPException(status_code=400, detail="ID do pedido já existe")
     pedidos.append(pedido)
     return pedido
-
 
 @app.get("/pedidos")
 def listar_pedidos():
