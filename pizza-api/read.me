@@ -1,0 +1,133 @@
+🍕 Pizza Orders API
+API simples para gerenciamento de pedidos de pizza desenvolvida com FastAPI.
+Este projeto foi criado para fins de estudo e demonstra como construir uma API REST básica em Python utilizando validação de dados com Pydantic.
+A API permite:
+• 
+Criar usuários
+• 
+Criar pedidos
+• 
+Adicionar itens aos pedidos
+• 
+Listar pedidos e usuários
+Os dados são armazenados em memória, portanto são apagados sempre que o servidor é reiniciado.
+ 
+🚀 Tecnologias Utilizadas
+• 
+Python
+• 
+FastAPI
+• 
+Pydantic
+• 
+Uvicorn
+ 
+▶️ Como Executar o Projeto
+1. Instalar dependências
+pip install fastapi uvicorn
+2. Iniciar o servidor
+uvicorn main:app --reload
+3. Acessar a API
+Após iniciar o servidor, a API estará disponível em:
+http://127.0.0.1:8000
+ 
+📚 Documentação Automática
+O FastAPI gera automaticamente uma interface para testar a API.
+Swagger UI:
+http://127.0.0.1:8000/docs
+ReDoc:
+http://127.0.0.1:8000/redoc
+ 
+📂 Estrutura de Dados
+A API possui três modelos principais.
+ 
+Usuário
+Representa um cliente que pode realizar pedidos.
+class Usuario(BaseModel):
+id: int
+nome: str
+email: str
+Exemplo
+{
+"id": 1,
+"nome": "João",
+"email": "joao@email.com"
+}
+ 
+Item do Pedido
+Representa um item dentro de um pedido.
+class ItemPedido(BaseModel):
+nome: str
+quantidade: int
+Exemplo
+{
+"nome": "Pizza Calabresa",
+"quantidade": 2
+}
+ 
+Pedido
+Representa um pedido realizado por um usuário.
+class Pedido(BaseModel):
+id: int
+usuario_id: int
+itens: List[ItemPedido]
+Exemplo
+{
+"id": 1,
+"usuario_id": 1,
+"itens": [
+{
+"nome": "Pizza Margherita",
+"quantidade": 1
+},
+{
+"nome": "Pizza Portuguesa",
+"quantidade": 2
+}
+]
+}
+ 
+💾 Armazenamento de Dados
+Os dados são armazenados temporariamente em listas Python:
+usuarios = []
+pedidos = []
+Isso significa que:
+• 
+Não existe banco de dados
+• 
+Os dados são perdidos quando o servidor é reiniciado
+ 
+📌 Fluxo Básico de Uso
+1. 
+Criar um usuário
+2. 
+Criar um pedido vinculado ao usuário
+3. 
+Adicionar itens ao pedido
+ 
+⚠️ Limitações do Projeto
+Este projeto foi desenvolvido apenas para fins de aprendizado e possui algumas limitações:
+• 
+Não utiliza banco de dados
+• 
+Não possui autenticação
+• 
+Não possui persistência de dados
+• 
+Não possui controle avançado de erros
+ 
+🔮 Possíveis Melhorias Futuras
+Algumas melhorias que podem ser implementadas:
+• 
+Integração com banco de dados (PostgreSQL ou SQLite)
+• 
+Implementação de autenticação JWT
+• 
+CRUD completo para usuários e pedidos
+• 
+Containerização com Docker
+• 
+Testes automatizados
+ 
+👨‍💻 Autor Gustavo Gonçalves
+Projeto desenvolvido para estudo de FastAPI e criação de APIs REST em Python.
